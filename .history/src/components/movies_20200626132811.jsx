@@ -45,25 +45,19 @@ class Movies extends Component {
         }
 
         handleSort = path => {
-                const sortColumn = {...this.state.sortColumn};
-                if(sortColumn.path === path) {
-                    sortColumn.order = sortColumn.order === 'asc' ? 'desc' : 'asc';
-                }else {
-                    sortColumn.path = path;
-                    sortColumn.order = 'asc';
-                }
-                this.setState({sortColumn})
+                this.setState({sortColumn: {path: path,order: 'asc'}})
+                console.log(this.state.sortColumn)
         }
 
     render() { 
             const {length : count} = this.state.movies
-            const {pageSize,currentPage,movies: allMovies,selectedGenre,sortColumn} = this.state;
+            const {pageSize,currentPage,movies: allMovies,selectedGenre} = this.state;
 
             if(count === 0) return <p>There are no movies in the database</p>
             
             const filtered = selectedGenre && selectedGenre._id ? allMovies.filter(m => m.genre._id === selectedGenre._id) : allMovies;
-           const sorted =  _.orderBy(filtered,[sortColumn.path],[sortColumn.order])
-            const movies = paginate(sorted,currentPage,pageSize);
+            _.orderBy(filtered,)
+            const movies = paginate(filtered,currentPage,pageSize);
 
         return (  
             <div className="container">

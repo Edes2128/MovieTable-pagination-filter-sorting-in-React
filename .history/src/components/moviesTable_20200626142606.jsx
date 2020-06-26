@@ -8,17 +8,26 @@ class MoviesTable extends Component {
      {path:'genre.name',label: 'Genre'},
      {path:'numberInStock',label: 'Stock'},
      {path:'dailyReantalRate',label: 'Rate'},
-     {key:'like'},
-     {key:'delete'}
+     {}
     ]
+
     render() { 
       
-        const {movies,onDelete,onLike,onSort,sortColumn} = this.props;
+        const {movies,onDelete,onLike} = this.props;
 
         return ( 
     
             <table className="table">
-            <TableHeader columns={this.columns} sortColumn={sortColumn} onSort={onSort}/>
+            <thead>
+                <tr>
+                    <th onClick={() => this.raiseSort('title')}>Title</th>
+                    <th onClick={() => this.raiseSort('genre.name')}>Genre</th>
+                    <th onClick={() => this.raiseSort('numberInStock')}>Stock</th>
+                    <th onClick={() => this.raiseSort('dailyRentalRate')}>Rate</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
             <tbody>
             {movies.map(movie => 
               

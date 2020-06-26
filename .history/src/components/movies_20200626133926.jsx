@@ -6,6 +6,7 @@ import {paginate} from '../utils/paginate';
 import {getGenres} from '../services/fakeGenreService'
 import MoviesTable from './moviesTable';
 import _ from 'lodash';
+
 class Movies extends Component {
     state = { 
         movies: [],
@@ -43,8 +44,14 @@ class Movies extends Component {
                 this.setState({selectedGenre: genre,currentPage: 1})
         }
 
-        handleSort = sortColumn => {
-              
+        handleSort = path => {
+                const sortColumn = {...this.state.sortColumn};
+                if(sortColumn.path === path) {
+                    sortColumn.order = sortColumn.order === 'asc' ? 'desc' : 'asc';
+                }else {
+                    sortColumn.path = path;
+                    sortColumn.order = 'asc';
+                }
                 this.setState({sortColumn})
         }
 
@@ -66,7 +73,7 @@ class Movies extends Component {
             </div>
             <div className="col">
             <h3><i>Showing {filtered.length} movies from database</i> <i className="fa fa-database"></i></h3>
-            <MoviesTable movies={movies} onDelete={this.handleDelete} onLike={this.handleLike} onSort={this.handleSort} sortColumn={sortColumn}/>
+            <MoviesTable movies={movies} onDelete={this.handleDelete} onLike={this.handleLike} onSort={this.handleSort} />
              <Pagination itemsCount={filtered.length} pageSize={pageSize} onPageChange={this.handlePageChange} currentPage={currentPage} />
             </div>    
              </div>

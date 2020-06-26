@@ -8,8 +8,8 @@ class MoviesTable extends Component {
      {path:'genre.name',label: 'Genre'},
      {path:'numberInStock',label: 'Stock'},
      {path:'dailyReantalRate',label: 'Rate'},
-     {key:'like'},
-     {key:'delete'}
+     {key:''},
+     {}
     ]
     render() { 
       
